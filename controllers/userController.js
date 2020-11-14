@@ -49,6 +49,7 @@ class UserController {
           access_token: userToken,
           full_name: user.full_name,
           email: user.email,
+          role: user.role
         })
       }
     } catch (error) {
