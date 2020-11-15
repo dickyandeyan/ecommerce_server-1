@@ -12,6 +12,17 @@ class ProductController {
     }
   }
 
+  static async getProductById(req, res, next) {
+    const id = +req.params.id
+
+    try {
+      const getProd = await Product.findByPk(id)
+      res.status(200).json(getProd)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   static async addProduct(req, res, next) {
     const userId = +req.loggedInUser.id
     try {
