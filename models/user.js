@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasMany(models.Product, { foreignKey: 'userId' })
+      User.hasMany(models.Cart, { foreignKey: 'UserId' })
     }
   }
   User.init(
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            message: 'Name is required',
+            msg: 'Name is required',
           },
         },
       },
@@ -29,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         validate: {
           isEmail: {
-            message: 'Must be email format!',
+            msg: 'Must be email format!',
           },
           notEmpty: {
-            message: 'Email is required',
+            msg: 'Email is required',
           },
         },
       },
@@ -46,11 +46,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            message: 'Password is required',
+            msg: 'Password is required',
           },
           len: {
             args: [6],
-            message: 'Minimum 6 character',
+            msg: 'Password length minimum 6 character',
           },
         },
       },

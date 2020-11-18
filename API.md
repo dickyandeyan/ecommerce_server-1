@@ -1,4 +1,4 @@
-# API Documentation For E-Commerce CMS Server
+# API Documentation For E-Commerce CMS Server & Client customer 
 
 ## **Add Product**
 

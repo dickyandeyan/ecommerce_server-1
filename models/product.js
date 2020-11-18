@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Product.belongsTo(models.User, { foreignKey: 'userId' })
+      Product.hasMany(models.Cart, { foreignKey: 'ProductId' })
     }
   }
   Product.init(
@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: 'Product name is required'
-          }
-        }
+            msg: 'Product name is required',
+          },
+        },
       },
       image_url: {
         type: DataTypes.STRING,
@@ -29,13 +29,13 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: 'Image URL is required'
+            msg: 'Image URL is required',
           },
           isUrl: {
             args: true,
-            msg: 'Invalid URL format'
-          }
-        }
+            msg: 'Invalid URL format',
+          },
+        },
       },
       price: {
         type: DataTypes.DOUBLE,
@@ -43,18 +43,18 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           min: {
             args: [0],
-            msg: 'Price must be greater than 0'
+            msg: 'Price must be greater than 0',
           },
 
           notEmpty: {
             args: true,
-            msg: 'Price is required'
+            msg: 'Price is required',
           },
           isInt: {
             args: true,
-            msg: `Only can fill with number`
-          }
-        }
+            msg: `Only can fill with number`,
+          },
+        },
       },
       stock: {
         type: DataTypes.INTEGER,
@@ -62,34 +62,24 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           min: {
             args: [0],
-            msg: `Stock can't be less than 0`
+            msg: `Stock can't be less than 0`,
           },
 
           notEmpty: {
             args: true,
-            msg: 'Stock is required'
+            msg: 'Stock is required',
           },
 
           isInt: {
             args: true,
-            msg: `Only can fill with number`
-          }
-        }
-      },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Users',
-          key: 'id'
+            msg: `Only can fill with number`,
+          },
         },
-        onUpdate: 'NO ACTION',
-        onDelete: 'CASCADE'
-      }
+      },
     },
     {
       sequelize,
-      modelName: 'Product'
+      modelName: 'Product',
     }
   )
   return Product

@@ -1,10 +1,11 @@
 const { Product } = require('../models/index')
+const { User } = require('../models/index')
 
 class ProductController {
   static async getProduct(req, res, next) {
     try {
       const product = await Product.findAll({
-        order: [['id', 'DESC']]
+        order: [['id', 'DESC']],
       })
       res.status(200).json(product)
     } catch (error) {
@@ -24,7 +25,7 @@ class ProductController {
   }
 
   static async addProduct(req, res, next) {
-    const userId = +req.loggedInUser.id
+    // const UserId = +req.loggedInUser.id
     try {
       let { name, image_url, price, stock } = req.body
 
@@ -33,7 +34,6 @@ class ProductController {
         image_url,
         price,
         stock,
-        userId
       })
 
       if (newProduct) {
@@ -41,7 +41,7 @@ class ProductController {
       } else {
         next({
           status: 500,
-          message: `Error while adding product`
+          message: `Error while adding product`,
         })
       }
     } catch (error) {
@@ -59,13 +59,13 @@ class ProductController {
           name,
           image_url,
           price,
-          stock
+          stock,
         },
         { where: { id } }
       )
 
       if (updated[0] > 0) {
-        res.status(200).json({ message: 'Product updated!'})
+        res.status(200).json({ message: 'Product updated!' })
       } else {
         next()
       }
