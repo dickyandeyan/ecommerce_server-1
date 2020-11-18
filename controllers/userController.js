@@ -163,12 +163,12 @@ class UserController {
 
       const cartItem = await Cart.destroy({
         where: {
-          userId: id,
+          UserId: id,
           ProductId
         }
       })
       res.status(200).json({
-        message: 'Successfully remove from cart!'
+        message: 'Successfully remove from cart!', cartItem
       })
     } catch (error) {
       next(error)
