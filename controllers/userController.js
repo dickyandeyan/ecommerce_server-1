@@ -1,7 +1,6 @@
 const { User, Cart, Product } = require('../models/index')
 const { comparePassword } = require('../helpers/bcrypt')
 const { generateToken } = require('../helpers/jwt')
-const cart = require('../models/cart')
 
 class UserController {
   static async postRegister(req, res, next) {
